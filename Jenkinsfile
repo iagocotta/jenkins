@@ -9,7 +9,7 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image'){
+        stage('Push Docker Image') {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com','dockerhub') {
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Deploy Kubernetes') {
             steps{
-                withKubeconfig([credentialsId: 'kubeconfig']){
+                withKubeconfig([credentialsId: 'kubeconfig']) {
                     sh 'kubectl apply -f ./K8S/deployment.yaml'
                 }
             }
